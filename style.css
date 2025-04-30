@@ -1,0 +1,57 @@
+/* Custom Styles for Karmafy Website */
+
+/* Ensure html and body take full height for potential sticky footer or layout needs */
+html, body {
+    height: 100%;
+    font-family: sans-serif; /* Basic font stack */
+}
+
+/* Define animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Utility class to apply the animation */
+/* We apply this directly via inline style in the HTML for delay variations,
+   but keep the definition here for clarity and potential future use. */
+.animate-fadeIn {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Add any additional custom styles or more complex animations below */
+
+/* Example: Style for active navigation link (requires JS or page-specific classes) */
+/* 
+nav ul li a.active {
+    color: #4f46e5; 
+    font-weight: bold;
+}
+*/
+
+/* Styling adjustments for Tailwind components if needed */
+body {
+    @apply bg-gray-100 text-gray-800 font-sans;
+}
+
+header {
+    @apply bg-white shadow-md sticky top-0 z-50;
+}
+
+nav {
+    @apply container mx-auto px-6 py-4 flex justify-between items-center;
+}
+
+footer {
+    @apply bg-gray-800 text-gray-300 py-8 mt-16;
+}
+
+/* Note: @apply directives require a build step if used outside of Tailwind's direct mechanisms.
+   If not using a build step, stick to standard CSS or Tailwind classes in HTML. 
+   Keeping these here for reference but they won't work via CDN alone. */ 

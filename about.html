@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Karmafy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-indigo-600">Karmafy</a>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="text-gray-600 hover:text-indigo-600 font-medium">Home</a></li>
+                <li><a href="about.html" class="text-gray-600 hover:text-indigo-600 font-medium">About Us</a></li>
+                <li><a href="contact.html" class="text-gray-600 hover:text-indigo-600 font-medium">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-16">
+        <div class="bg-white p-8 md:p-12 rounded-lg shadow-lg animate-fadeIn">
+            <h1 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-6">About Karmafy</h1>
+            <p class="text-lg text-gray-700 mb-4 leading-relaxed">
+                Karmafy is a passionate team dedicated to building high-quality, user-centric native iOS applications. We believe in the power of elegant design, seamless performance, and intuitive user experiences. Our expertise lies in leveraging the latest Apple technologies to bring innovative mobile ideas to life.
+            </p>
+            <p class="text-lg text-gray-700 mb-4 leading-relaxed">
+                From initial concept to App Store launch and beyond, we partner with our clients to create apps that not only meet but exceed expectations. We focus on clean code, robust architecture, and pixel-perfect interfaces to ensure every app we build is a masterpiece of form and function.
+            </p>
+            <h2 class="text-2xl font-semibold text-gray-800 mt-8 mb-4">Our Expertise</h2>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li>Native iOS Development (Swift, Objective-C)</li>
+                <li>UI/UX Design for Mobile</li>
+                <li>App Store Optimization (ASO)</li>
+                <li>API Integration</li>
+                <li>Performance Tuning</li>
+                <li>Ongoing App Maintenance & Support</li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Karmafy. All rights reserved.</p>
+            <p class="text-sm text-gray-500 mt-2">Specializing in Native iOS App Development</p>
+        </div>
+    </footer>
+
+</body>
+</html> 

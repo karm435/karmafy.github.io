@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karmafy - Native iOS App Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-indigo-600">Karmafy</a>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="text-gray-600 hover:text-indigo-600 font-medium">Home</a></li>
+                <li><a href="about.html" class="text-gray-600 hover:text-indigo-600 font-medium">About Us</a></li>
+                <li><a href="contact.html" class="text-gray-600 hover:text-indigo-600 font-medium">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-indigo-600 text-white py-20 animate-fadeIn">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crafting Exceptional Native iOS Apps</h1>
+            <p class="text-lg md:text-xl mb-8 text-indigo-100">We transform ideas into beautiful, high-performance iOS applications.</p>
+            <a href="contact.html" class="bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- App Showcase Section -->
+    <section id="apps" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 animate-fadeIn" style="animation-delay: 0.2s;">Our Creations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                <!-- App Card 1: KVeo -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 animate-fadeIn" style="animation-delay: 0.4s;">
+                    <img src="assets/kveo-placeholder.png" alt="KVeo App Screenshot" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">AI Video Generator: KVeo</h3>
+                        <p class="text-gray-600 mb-4">Transforms text prompts into stunning videos using AI. Supports portrait/landscape, custom duration, and easy sharing.</p>
+                        <a href="https://apps.apple.com/app/id6744858677" target="_blank" rel="noopener noreferrer" class="inline-block bg-indigo-500 text-white py-2 px-4 rounded hover:bg-indigo-600 transition duration-300">View on App Store</a>
+                    </div>
+                </div>
+
+                <!-- Add more app cards here -->
+                 <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 animate-fadeIn flex items-center justify-center h-full border-2 border-dashed border-gray-300" style="animation-delay: 0.6s;">
+                    <p class="text-gray-500 text-center p-6">More amazing apps coming soon!</p>
+                 </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Karmafy. All rights reserved.</p>
+             <p class="text-sm text-gray-500 mt-2">Specializing in Native iOS App Development</p>
+        </div>
+    </footer>
+
+</body>
+</html> 
