@@ -1,5 +1,6 @@
 {
     "appId": "6744858677",
+    "isLive": false,
   "1.png": "The main creation screen where users input text prompts to generate videos.",
   "2.png": "Advanced settings allow customization of video style, aspect ratio, and duration.",
   "3.png": "A history view keeps track of all previously generated videos for easy access.",

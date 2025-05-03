@@ -95,8 +95,25 @@
     <!-- App Showcase Section -->
     <section id="apps" class="py-16">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12 animate-fadeIn" style="animation-delay: 0.2s;">Our Creations</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"> <!-- Increased gap-y -->
+            
+            <!-- Live Apps Section -->
+            <div id="live-apps-section">
+                <h2 class="text-3xl font-bold text-center mb-12 animate-fadeIn" style="animation-delay: 0.2s;">Live Apps</h2>
+                <div id="live-apps-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 mb-16">
+                    <!-- Live app cards will be moved here by JS -->
+                </div>
+            </div>
+
+            <!-- Upcoming Apps Section -->
+            <div id="upcoming-apps-section" style="display: none;"> <!-- Initially hidden -->
+                 <h2 class="text-3xl font-bold text-center mb-12 animate-fadeIn" style="animation-delay: 0.3s;">Upcoming Apps</h2>
+                 <div id="upcoming-apps-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+                    <!-- Upcoming app cards will be moved here by JS -->
+                </div>
+            </div>
+
+            <!-- Original container - Will be hidden/cleared by JS -->
+            <div id="original-apps-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12" style="display: none;"> 
 
                 <!-- KVeo App Card -->
                 <div class="app-card bg-white rounded-xl shadow-lg overflow-hidden animate-fadeIn" style="animation-delay: 0.4s;" data-appname="kveo">
@@ -238,50 +255,103 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const appCards = document.querySelectorAll('.app-card');
+        const originalAppsGrid = document.getElementById('original-apps-grid');
+        const liveAppsGrid = document.getElementById('live-apps-grid');
+        const upcomingAppsGrid = document.getElementById('upcoming-apps-grid');
+        const upcomingSection = document.getElementById('upcoming-apps-section');
+        const appCards = Array.from(originalAppsGrid.querySelectorAll('.app-card')); // Get cards from original grid
 
-        appCards.forEach(card => {
+        if (!liveAppsGrid || !upcomingAppsGrid || !upcomingSection || !originalAppsGrid) {
+            console.error('Required grid elements not found!');
+            return;
+        }
+
+        const appStoreBaseUrl = 'https://apps.apple.com/app/id';
+        let upcomingAppCount = 0;
+
+        // Create an array of promises to fetch data for all cards
+        const fetchPromises = appCards.map(card => {
             const appName = card.dataset.appname;
-            const appStoreLink = card.querySelector('.app-store-link');
-
-            if (!appName || !appStoreLink) {
-                console.warn('Could not find appName or App Store link for a card:', card);
-                return; // Skip this card if essential elements are missing
+            if (!appName) {
+                console.warn('Card missing data-appname:', card);
+                return Promise.resolve({ card, data: null, error: 'Missing data-appname' }); // Resolve gracefully
             }
-
-            // Define the base URL for the App Store
-            const appStoreBaseUrl = 'https://apps.apple.com/app/id';
-
-            // Fetch the descriptions.json for this app
-            fetch(`assets/${appName}/descriptions.json`)
+            
+            return fetch(`assets/${appName}/descriptions.json`)
                 .then(response => {
                     if (!response.ok) {
-                        // If file not found (404) or other error, log it but don't break the page
+                        // Treat fetch errors (like 404) as 'upcoming' or 'data unavailable'
                         console.warn(`Could not fetch descriptions.json for ${appName}. Status: ${response.status}`);
-                        return null; // Return null to indicate failure
+                        return { card, data: { isLive: false, appId: null }, error: `Fetch failed: ${response.status}` }; // Default to upcoming
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data && data.appId) {
-                        const appStoreUrl = `${appStoreBaseUrl}${data.appId}`;
-                        appStoreLink.href = appStoreUrl; // Update the link's href
-                    } else if (data) {
-                         // JSON loaded but appId is missing
-                        console.warn(`AppId not found in descriptions.json for ${appName}. Leaving link as '#'.`);
-                        appStoreLink.href = '#'; // Keep default or set explicitly
-                    } else {
-                        // This case handles the null return from a failed fetch
-                        console.warn(`Descriptions.json was not loaded for ${appName}. Leaving link as '#'.`);
-                        appStoreLink.href = '#'; // Keep default or set explicitly
-                    }
+                    return response.json().then(data => ({ card, data, error: null }));
                 })
                 .catch(error => {
-                    // Catch network errors or JSON parsing errors
-                    console.error(`Error processing descriptions.json for ${appName}:`, error);
-                     appStoreLink.href = '#'; // Ensure link doesn't point anywhere problematic
+                    console.error(`Error fetching or parsing descriptions.json for ${appName}:`, error);
+                    return { card, data: { isLive: false, appId: null }, error: error.message }; // Default to upcoming on error
                 });
         });
+
+        // Process all fetches once they settle
+        Promise.allSettled(fetchPromises)
+            .then(results => {
+                results.forEach(result => {
+                    let isLive = false; // Default to not live
+
+                    if (result.status === 'fulfilled') {
+                        const { card, data, error } = result.value;
+                        const appStoreLink = card.querySelector('.app-store-link');
+                        
+                        // Determine live status
+                        isLive = (data && data.isLive === true);
+
+                        // Update App Store link if possible AND the app is live
+                        if (appStoreLink && isLive && data && data.appId) {
+                            const appStoreUrl = `${appStoreBaseUrl}${data.appId}`;
+                            appStoreLink.href = appStoreUrl;
+                            appStoreLink.style.display = ''; // Ensure visible if live
+                        } else if (appStoreLink) {
+                            // If not live, or no appId, hide the link
+                            appStoreLink.style.display = 'none'; 
+                            if(!error && !isLive && data && data.appId) console.warn(`Hiding App Store link for non-live app: ${card.dataset.appname}`);
+                            else if(!error && isLive && !(data && data.appId)) console.warn(`Hiding App Store link due to missing appId for live app: ${card.dataset.appname}`);
+                            else if (!isLive) console.warn(`Hiding App Store link for upcoming/failed fetch app: ${card.dataset.appname}`);
+                        }
+
+                        // Sort into grids based on determined live status
+                        if (isLive) {
+                            liveAppsGrid.appendChild(card);
+                        } else {
+                            upcomingAppsGrid.appendChild(card);
+                            upcomingAppCount++;
+                        }
+                    } else {
+                        // Handle rejected promises (though catch above should handle most)
+                        console.error('Fetch promise rejected:', result.reason);
+                        // Move card to upcoming as a fallback
+                         if(result.reason && result.reason.card) {
+                            const card = result.reason.card;
+                            const appStoreLink = card.querySelector('.app-store-link');
+                            if (appStoreLink) {
+                                 appStoreLink.style.display = 'none'; // Hide link on error too
+                            }
+                            upcomingAppsGrid.appendChild(card);
+                            upcomingAppCount++;
+                         } 
+                    }
+                });
+
+                // Show the upcoming section only if it has apps
+                if (upcomingAppCount > 0) {
+                    upcomingSection.style.display = 'block';
+                }
+                
+                // Optional: Remove the original grid from DOM after processing
+                // originalAppsGrid.remove(); 
+                // Or ensure it stays hidden:
+                 originalAppsGrid.style.display = 'none';
+
+            });
     });
     </script>
 
