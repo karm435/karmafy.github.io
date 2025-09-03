@@ -55,3 +55,85 @@ footer {
 /* Note: @apply directives require a build step if used outside of Tailwind's direct mechanisms.
    If not using a build step, stick to standard CSS or Tailwind classes in HTML. 
    Keeping these here for reference but they won't work via CDN alone. */ 
+
+/* Skeleton Loading */
+.skeleton-card { position: relative; overflow: hidden; }
+.skeleton-line, .skeleton-block {
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 37%, #f3f4f6 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.2s infinite;
+}
+.skeleton-block { height: 16rem; }
+.skeleton-line { height: 1rem; border-radius: 0.5rem; }
+
+@keyframes shimmer {
+    0% { background-position: 100% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* Reveal on scroll */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Gradient fallback for preview area when screenshots are absent */
+.bg-gradient {
+    background: radial-gradient(1200px circle at 0% 0%, rgba(99,102,241,0.15), transparent 40%),
+                radial-gradient(1200px circle at 100% 0%, rgba(236,72,153,0.12), transparent 40%),
+                radial-gradient(1200px circle at 50% 100%, rgba(16,185,129,0.12), transparent 40%);
+}
+
+/* Tab styles */
+.tab-pane {
+    animation: fadeInTab 0.3s ease-out;
+}
+
+.tab-pane.hidden {
+    display: none !important;
+}
+
+@keyframes fadeInTab {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Enhanced screenshot gallery */
+.screenshot-detail-item img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.screenshot-detail-item:hover img {
+    transform: scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Modal styles */
+.modal-overlay {
+    backdrop-filter: blur(4px);
+}
+
+/* Improved hero section */
+.hero-feature-card {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Tab button hover effects */
+button[data-tab] {
+    position: relative;
+    overflow: hidden;
+}
+
+button[data-tab]:hover {
+    background-color: rgba(99,102,241,0.05);
+}
+
+button[data-tab]:active {
+    transform: translateY(1px);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
