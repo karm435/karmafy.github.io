@@ -3,230 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Title will be set dynamically -->
-    <title>App Details - Karmafy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Karmafy Apps Pty Ltd</title>
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('karmafy-theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/karmafy-apps-logo.png">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Basic animation (reusable) */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-
-        /* Scroll Animation Styles */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .scroll-animate.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Detail Item Styles */
-        .screenshot-detail-item img {
-            max-height: 500px; /* Adjust as needed */
-            object-fit: contain;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-             background-color: #f9fafb; /* gray-50 */
-             padding: 0.5rem;
-        }
-
-    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
-
-    <!-- Header & Navigation (Same as other pages) -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-indigo-600">Karmafy</a>
-            <ul class="flex space-x-6">
-                <li><a href="index.html" class="text-gray-600 hover:text-indigo-600 font-medium">Home</a></li>
-                <li><a href="about.html" class="text-gray-600 hover:text-indigo-600 font-medium">About Us</a></li>
-                <li><a href="contact.html" class="text-gray-600 hover:text-indigo-600 font-medium">Contact Us</a></li>
-            </ul>
+<body>
+    <header class="site-header">
+        <nav class="site-shell site-nav" aria-label="Primary navigation">
+            <a href="index.html" class="brand-mark" aria-label="Karmafy Apps Pty Ltd home">
+                <img src="assets/karmafy-apps-logo.png" alt="Karmafy Apps Pty Ltd" class="brand-logo">
+            </a>
+            <div class="nav-links" aria-label="Primary links">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#process">Process</a>
+                <a href="index.html#apps">Work</a>
+                <a href="index.html#blog">Blog</a>
+                <a href="about.html">About</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" type="button" aria-label="Switch color theme" data-theme-toggle>
+                    <span data-theme-icon>◐</span>
+                </button>
+                <a href="contact.html" class="pill-button primary">Start a Project</a>
+            </div>
         </nav>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="container mx-auto px-6 py-16">
-        <!-- App name will be loaded here -->
-        <h1 id="app-name" class="text-4xl font-bold text-center text-indigo-600 mb-6 animate-fadeIn">App Name</h1>
-        <p id="app-tagline" class="text-xl text-center text-gray-600 mb-12 animate-fadeIn" style="animation-delay: 0.1s;">Loading details...</p>
-        
-        <!-- Back link -->
-         <div class="mb-12 text-center animate-fadeIn" style="animation-delay: 0.2s;">
-            <a href="index.html#apps" class="text-indigo-600 hover:underline">&larr; Back to All Apps</a>
-        </div>
+    <main>
+        <section class="detail-hero">
+            <div class="site-shell detail-shell">
+                <a href="index.html#apps" class="text-link">Back to selected work</a>
+                <div class="content-card" style="margin-top: 1.25rem;">
+                    <div id="app-icon-wrap" class="app-meta"></div>
+                    <p class="section-kicker">App Store product</p>
+                    <h1 id="app-name" class="detail-title">Loading app...</h1>
+                    <p id="app-tagline" class="detail-copy">Pulling the latest generated Apple metadata.</p>
+                    <div id="app-actions" class="hero-actions"></div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Container for Screenshots and Descriptions -->
-        <div id="screenshots-container" class="space-y-16 md:space-y-24">
-            <!-- Content generated by JS -->
-        </div>
-        
-        <!-- Placeholder while loading or if app not found -->
-         <div id="loading-placeholder" class="text-center py-10 text-gray-500">
-             Loading app details...
-         </div>
-
+        <section class="section compact">
+            <div class="site-shell detail-shell">
+                <div class="split-heading">
+                    <div>
+                        <p class="section-kicker">Product details</p>
+                        <h2 class="section-heading">Screens and notes.</h2>
+                    </div>
+                    <p class="section-intro">
+                        Apple-hosted screenshots are used when available. Local notes stay available as a fallback for richer feature context.
+                    </p>
+                </div>
+                <div id="screenshots-container" class="screenshots-grid"></div>
+                <div id="loading-placeholder" class="status-note">Loading app details...</div>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer (Same as other pages) -->
-    <footer class="bg-gray-800 text-gray-300 py-8 mt-16">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 Karmafy. All rights reserved.</p>
-            <p class="text-sm text-gray-500 mt-2">Specializing in Native iOS App Development</p>
+    <footer class="site-footer">
+        <div class="site-shell footer-grid">
+            <a href="index.html" class="brand-mark" aria-label="Karmafy Apps Pty Ltd home">
+                <img src="assets/karmafy-apps-logo.png" alt="Karmafy Apps Pty Ltd" class="brand-logo">
+            </a>
+            <p>&copy; 2026 Karmafy Apps Pty Ltd. Mobile app consulting, design, and engineering.</p>
         </div>
     </footer>
 
-    <!-- JavaScript for Dynamic Loading -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            window.KarmafyTheme?.init();
+            window.KarmafyEmail?.init();
+
             const params = new URLSearchParams(window.location.search);
-            const appName = params.get('app'); // e.g., 'kveo'
+            const appParam = params.get('app');
             const screenshotsContainer = document.getElementById('screenshots-container');
             const appNameHeading = document.getElementById('app-name');
-            const appTagline = document.getElementById('app-tagline'); // Added tagline element
+            const appTagline = document.getElementById('app-tagline');
             const loadingPlaceholder = document.getElementById('loading-placeholder');
-            const appStoreBaseUrl = 'https://apps.apple.com/app/id';
+            const appActions = document.getElementById('app-actions');
+            const appIconWrap = document.getElementById('app-icon-wrap');
 
-            // Function to format App Name (e.g., kveo -> KVeo)
-            function formatAppName(name) {
-                if (!name) return 'App';
-                // Simple capitalization, can be made more sophisticated
-                 return name.charAt(0).toUpperCase() + name.slice(1);
+            function appendText(parent, tagName, className, text) {
+                const element = document.createElement(tagName);
+                if (className) element.className = className;
+                element.textContent = text;
+                parent.appendChild(element);
+                return element;
             }
 
-            if (!appName) {
+            function appStoreUrl(app) {
+                return app.trackViewUrl || (app.appId ? `https://apps.apple.com/app/id${app.appId}` : '');
+            }
+
+            function localImageUrl(slug, index) {
+                return `assets/${slug}/${index}.png`;
+            }
+
+            function appleScreenshotUrls(app) {
+                return [
+                    ...(Array.isArray(app.screenshotUrls) ? app.screenshotUrls : []),
+                    ...(Array.isArray(app.ipadScreenshotUrls) ? app.ipadScreenshotUrls : [])
+                ];
+            }
+
+            function createScreenshotItem(app, imageUrl, description, index) {
+                const item = document.createElement('article');
+                item.className = 'screenshot-detail-item scroll-animate';
+
+                const media = document.createElement('div');
+                const image = document.createElement('img');
+                image.src = imageUrl;
+                image.alt = `${app.trackName || 'App'} screenshot ${index + 1}`;
+                image.loading = 'lazy';
+                image.onerror = () => {
+                    media.replaceChildren();
+                    const frame = document.createElement('div');
+                    frame.className = index % 2 === 0 ? 'phone-screen' : 'phone-screen alt';
+                    frame.style.minHeight = '28rem';
+                    frame.setAttribute('aria-hidden', 'true');
+                    media.appendChild(frame);
+                };
+                media.appendChild(image);
+
+                const copy = document.createElement('div');
+                copy.className = 'screenshot-copy';
+                appendText(copy, 'span', 'card-index', `Screen ${index + 1}`);
+                appendText(copy, 'p', '', description || app.description || 'A focused product moment from the app experience.');
+
+                item.append(media, copy);
+                return item;
+            }
+
+            function setupScrollAnimations() {
+                const animatedItems = document.querySelectorAll('.scroll-animate');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                animatedItems.forEach((item) => observer.observe(item));
+            }
+
+            function renderApp(app) {
+                const name = app.trackName || 'Karmafy App';
+                document.title = `${name} - Karmafy`;
+                appNameHeading.textContent = name;
+                appTagline.textContent = app.description || 'A mobile product designed and engineered by Karmafy.';
+
+                const iconUrl = app.artworkUrl512 || app.artworkUrl100;
+                appIconWrap.replaceChildren();
+                if (iconUrl) {
+                    const icon = document.createElement('img');
+                    icon.src = iconUrl;
+                    icon.alt = `${name} icon`;
+                    icon.width = 72;
+                    icon.height = 72;
+                    icon.style.borderRadius = '1rem';
+                    icon.style.boxShadow = 'var(--shadow-tight)';
+                    appIconWrap.appendChild(icon);
+                }
+                appendText(appIconWrap, 'span', 'chip', app.primaryGenreName || 'Mobile App');
+                if (app.version) appendText(appIconWrap, 'span', 'chip', `v${app.version}`);
+
+                appActions.replaceChildren();
+                const storeUrl = appStoreUrl(app);
+                if (storeUrl) {
+                    const storeLink = document.createElement('a');
+                    storeLink.className = 'pill-button primary';
+                    storeLink.href = storeUrl;
+                    storeLink.target = '_blank';
+                    storeLink.rel = 'noopener noreferrer';
+                    storeLink.textContent = 'Open on App Store';
+                    appActions.appendChild(storeLink);
+                }
+                const contactLink = document.createElement('a');
+                contactLink.className = 'pill-button';
+                contactLink.href = 'contact.html';
+                contactLink.textContent = 'Build Something Similar';
+                appActions.appendChild(contactLink);
+
+                const descriptions = app.localDescriptions || {};
+                const screenshots = appleScreenshotUrls(app);
+                const items = [];
+
+                if (screenshots.length) {
+                    screenshots.slice(0, 6).forEach((url, index) => {
+                        items.push(createScreenshotItem(app, url, descriptions[`${index + 1}.png`], index));
+                    });
+                } else {
+                    Object.values(descriptions).slice(0, 6).forEach((description, index) => {
+                        items.push(createScreenshotItem(app, localImageUrl(app.slug, index + 1), description, index));
+                    });
+                }
+
+                if (!items.length) {
+                    const fallback = document.createElement('article');
+                    fallback.className = 'content-card';
+                    appendText(fallback, 'h3', '', 'Live App Store metadata is available.');
+                    appendText(fallback, 'p', '', app.description || 'Detailed screenshots were not returned by Apple for this storefront, but the generated metadata is ready for display.');
+                    items.push(fallback);
+                }
+
+                screenshotsContainer.replaceChildren(...items);
+                loadingPlaceholder.hidden = true;
+                setupScrollAnimations();
+            }
+
+            async function loadLocalFallback(slug) {
+                const response = await fetch(`assets/${slug}/descriptions.json`);
+                if (!response.ok) throw new Error('Local fallback unavailable');
+                const data = await response.json();
+                return {
+                    slug,
+                    appId: data.appId || '',
+                    trackName: slug.charAt(0).toUpperCase() + slug.slice(1),
+                    description: data.tagline || 'A mobile product designed and engineered by Karmafy.',
+                    localDescriptions: Object.fromEntries(Object.entries(data).filter(([key]) => key.endsWith('.png')))
+                };
+            }
+
+            async function loadApp() {
+                if (!appParam) {
                 appNameHeading.textContent = 'App Not Found';
                 appTagline.textContent = 'Please select an app from the homepage.';
                 loadingPlaceholder.textContent = 'No app specified in the URL.';
-                screenshotsContainer.innerHTML = ''; 
                 return;
             }
-            
-            const formattedAppName = formatAppName(appName);
-            appNameHeading.textContent = formattedAppName;
-            document.title = `${formattedAppName} Details - Karmafy`; // Update page title
-            appTagline.textContent = `Explore the features of ${formattedAppName}`; // Set initial tagline
-            loadingPlaceholder.textContent = `Loading details for ${formattedAppName}...`;
 
-            fetch(`assets/${appName}/descriptions.json`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (!data) {
-                         throw new Error('No data received from descriptions.json');
-                    }
-                    
-                    // Optionally update tagline if provided in JSON
-                    if(data.tagline) {
-                       appTagline.textContent = data.tagline; 
-                    }
-                    
-                    screenshotsContainer.innerHTML = ''; // Clear previous content
-                    let screenshotCount = 0;
-
-                    // Loop through expected screenshots (1.png to 6.png)
-                    for (let i = 1; i <= 6; i++) {
-                        const imgFilename = `${i}.png`;
-                        const description = data[imgFilename]; // Get description using filename as key
-
-                        if (description) { // Only add if description exists for this image number
-                            screenshotCount++;
-                            const imgPath = `assets/${appName}/${imgFilename}`;
-                            
-                            // Create elements
-                            const itemDiv = document.createElement('div');
-                            const imgDiv = document.createElement('div');
-                            const textDiv = document.createElement('div');
-                            const img = document.createElement('img');
-                            const p = document.createElement('p');
-
-                            // Configure image
-                            img.src = imgPath;
-                            img.alt = `Screenshot ${i} for ${formattedAppName}`;
-                            img.classList.add('max-h-[500px]', 'object-contain', 'rounded-lg', 'shadow-lg');
-                            img.loading = 'lazy'; // Lazy load images
-
-                            // Configure paragraph
-                            p.textContent = description;
-                            p.classList.add('text-lg', 'text-gray-700', 'leading-relaxed');
-                            
-                            // Configure divs
-                            imgDiv.classList.add('md:w-1/2', 'flex', 'justify-center', 'p-4');
-                            imgDiv.appendChild(img);
-                            
-                            textDiv.classList.add('md:w-1/2', 'text-center', 'md:text-left');
-                            textDiv.appendChild(p);
-                            
-                            // Configure main item container
-                            itemDiv.classList.add('screenshot-detail-item', 'flex', 'flex-col', 'items-center', 'gap-8', 'mb-16', 'scroll-animate');
-                             // Alternate layout using flex-row-reverse for even items (adjusting for 0-based count)
-                            if (screenshotCount % 2 === 0) {
-                                itemDiv.classList.add('md:flex-row-reverse');
-                            } else {
-                                itemDiv.classList.add('md:flex-row');
-                            }
-                            
-                            itemDiv.appendChild(imgDiv);
-                            itemDiv.appendChild(textDiv);
-                            
-                            screenshotsContainer.appendChild(itemDiv);
-                        }
-                    }
-                    
-                    if (screenshotCount === 0) {
-                        loadingPlaceholder.textContent = `No screenshots or descriptions found for ${formattedAppName}.`;
-                    } else {
-                        loadingPlaceholder.style.display = 'none'; // Hide loading placeholder
-                        // Initialize scroll animations AFTER content is added
-                        setupScrollAnimations(); 
-                    }
-
-                })
-                .catch(error => {
-                    console.error(`Error loading details for ${appName}:`, error);
-                    appNameHeading.textContent = `Error Loading ${formattedAppName}`;
-                    appTagline.textContent = 'Could not load app details. Please try again later.'
+                try {
+                    const response = await fetch('data/apps.json', { cache: 'no-store' });
+                    if (!response.ok) throw new Error(`Generated metadata unavailable: ${response.status}`);
+                    const payload = await response.json();
+                    const apps = Array.isArray(payload.apps) ? payload.apps : [];
+                    const app = apps.find((item) => item.slug === appParam || item.appId === appParam);
+                    if (!app) throw new Error('App not found in generated metadata');
+                    renderApp(app);
+                } catch (error) {
+                    console.warn('Generated app metadata failed, trying local fallback:', error);
+                    try {
+                        renderApp(await loadLocalFallback(appParam));
+                    } catch (fallbackError) {
+                        appNameHeading.textContent = 'Error Loading App';
+                        appTagline.textContent = 'Could not load app details. Please try again later.';
                     loadingPlaceholder.textContent = `Error: ${error.message}`;
-                    screenshotsContainer.innerHTML = '';
-                });
-            
-            // Function to setup Intersection Observer for scroll animations
-            function setupScrollAnimations() {
-                const animatedItems = document.querySelectorAll('.scroll-animate');
-                
-                const observerOptions = {
-                    root: null, // relative to the viewport
-                    rootMargin: '0px',
-                    threshold: 0.1 // Trigger when 10% of the item is visible
-                };
-
-                const observerCallback = (entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            observer.unobserve(entry.target); // Stop observing once animated
-                        }
-                    });
-                };
-
-                const observer = new IntersectionObserver(observerCallback, observerOptions);
-                animatedItems.forEach(item => observer.observe(item));
+                    }
+                }
             }
+
+            loadApp();
         });
     </script>
+    <script src="site.js"></script>
 
 </body>
 </html> 

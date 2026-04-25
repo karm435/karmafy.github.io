@@ -3,357 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karmafy - Native iOS App Development</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Karmafy designs, builds, and scales premium mobile apps for ambitious companies.">
+    <title>Karmafy Apps Pty Ltd</title>
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('karmafy-theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/karmafy-apps-logo.png">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Basic animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        
-        /* Modern card hover effect */
-        .app-card {
-            transition: all 0.3s ease;
-            position: relative; /* Needed for absolute positioning of icon */
-        }
-        .app-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Updated screenshot preview styles */
-        .app-screenshots-preview {
-            display: flex;
-            justify-content: center; /* Center the screenshots horizontally */
-            align-items: flex-end; /* Align bottom */
-            gap: 0.5rem; /* Space between screenshots */
-            padding: 0.5rem; /* Padding around the group */
-            height: 16rem; /* h-64 */
-            overflow: hidden; /* Hide overflow */
-            background-color: #e5e7eb; /* gray-200, slightly darker */
-        }
-        .app-screenshot-preview {
-            height: 95%; /* Slightly less than container */
-            max-width: 30%; /* Limit width */
-            object-fit: contain;
-            border-radius: 0.375rem; /* rounded-md */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            flex-shrink: 0; /* Prevent shrinking */
-        }
-         /* Style for the middle screenshot to be slightly larger/raised */
-        .app-screenshot-preview:nth-child(2) {
-             height: 100%; /* Full height */
-             transform: scale(1.02); /* Slightly larger */
-             z-index: 10;
-        }
-
-
-        /* App Icon Styling */
-        .app-icon {
-            position: absolute;
-            top: 14rem; /* Adjust based on screenshot height (h-64 = 16rem) - slightly less now */
-            left: 1.5rem; /* Corresponds to p-6 */
-            transform: translateY(-50%);
-            width: 5rem; /* 80px */
-            height: 5rem; /* 80px */
-            border-radius: 1rem; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            background-color: white; /* Ensure bg visibility if image has transparency */
-            padding: 0.25rem; /* Small padding */
-            z-index: 20; /* Ensure icon is above screenshots */
-        }
-    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+<body>
 
-    <!-- Header & Navigation -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-indigo-600">Karmafy</a>
-            <ul class="flex space-x-6">
-                <li><a href="index.html" class="text-gray-600 hover:text-indigo-600 font-medium">Home</a></li>
-                <li><a href="about.html" class="text-gray-600 hover:text-indigo-600 font-medium">About Us</a></li>
-                <li><a href="contact.html" class="text-gray-600 hover:text-indigo-600 font-medium">Contact Us</a></li>
-            </ul>
+    <header class="site-header">
+        <nav class="site-shell site-nav" aria-label="Primary navigation">
+            <a href="index.html" class="brand-mark" aria-label="Karmafy Apps Pty Ltd home">
+                <img src="assets/karmafy-apps-logo.png" alt="Karmafy Apps Pty Ltd" class="brand-logo">
+            </a>
+            <div class="nav-links" aria-label="Page sections">
+                <a href="#services">Services</a>
+                <a href="#process">Process</a>
+                <a href="#apps">Work</a>
+                <a href="#blog">Blog</a>
+                <a href="about.html">About</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" type="button" aria-label="Switch color theme" data-theme-toggle>
+                    <span data-theme-icon>◐</span>
+                </button>
+                <a href="contact.html" class="pill-button primary">Start a Project</a>
+            </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-indigo-600 text-white py-20 animate-fadeIn">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Crafting Exceptional Native iOS Apps</h1>
-            <p class="text-lg md:text-xl mb-8 text-indigo-100">We transform ideas into beautiful, high-performance iOS applications.</p>
-            <a href="contact.html" class="bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300">Get In Touch</a>
-        </div>
-    </section>
-
-    <!-- App Showcase Section -->
-    <section id="apps" class="py-16">
-        <div class="container mx-auto px-6">
-            
-            <!-- Live Apps Section -->
-            <div id="live-apps-section">
-                <h2 class="text-3xl font-bold text-center mb-12 animate-fadeIn" style="animation-delay: 0.2s;">Live Apps</h2>
-                <div id="live-apps-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 mb-16">
-                    <!-- Live app cards will be moved here by JS -->
+    <main>
+        <section class="hero">
+            <div class="site-shell hero-grid">
+                <div class="animate-fadeIn">
+                    <div class="eyebrow">Mobile product consulting</div>
+                    <h1 class="hero-title">Apps that feel <span>inevitable.</span></h1>
+                    <p class="hero-copy">
+                        Karmafy partners with founders and teams to design, build, and ship polished mobile products: native apps, launch-ready UX, scalable architecture, and App Store execution.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="contact.html" class="pill-button primary">Book a Product Call</a>
+                        <a href="#apps" class="pill-button">See Selected Work</a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Upcoming Apps Section -->
-            <div id="upcoming-apps-section" style="display: none;"> <!-- Initially hidden -->
-                 <h2 class="text-3xl font-bold text-center mb-12 animate-fadeIn" style="animation-delay: 0.3s;">Upcoming Apps</h2>
-                 <div id="upcoming-apps-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-                    <!-- Upcoming app cards will be moved here by JS -->
+            <div class="site-shell metric-strip" aria-label="Karmafy capabilities">
+                <div class="metric-card">
+                    <strong>10</strong>
+                    <span>product sites linked</span>
+                </div>
+                <div class="metric-card">
+                    <strong>iOS</strong>
+                    <span>Swift, SwiftUI, UIKit</span>
+                </div>
+                <div class="metric-card">
+                    <strong>0→1</strong>
+                    <span>strategy through release</span>
+                </div>
+                <div class="metric-card">
+                    <strong>Care</strong>
+                    <span>maintenance after launch</span>
                 </div>
             </div>
+        </section>
 
-            <!-- Original container - Will be hidden/cleared by JS -->
-            <div id="original-apps-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12" style="display: none;"> 
-
-                <!-- KVeo App Card -->
-                <div class="app-card bg-white rounded-xl shadow-lg overflow-hidden animate-fadeIn" style="animation-delay: 0.4s;" data-appname="kveo">
-                    <div class="app-screenshots-preview"> 
-                        <img src="assets/kveo/1.png" alt="KVeo Screenshot 1" class="app-screenshot-preview">
-                        <img src="assets/kveo/2.png" alt="KVeo Screenshot 2" class="app-screenshot-preview">
-                        <img src="assets/kveo/3.png" alt="KVeo Screenshot 3" class="app-screenshot-preview">
+        <section id="services" class="section">
+            <div class="site-shell">
+                <div class="split-heading">
+                    <div>
+                        <p class="section-kicker">What we do</p>
+                        <h2 class="section-heading">Mobile work with product taste.</h2>
                     </div>
-                    <img src="assets/kveo/appIcon.png" alt="KVeo App Icon" class="app-icon">
-                    <div class="p-6 pt-12"> <!-- Reduced top padding slightly -->
-                        <h3 class="text-xl font-semibold mb-2 mt-2">KVeo - AI Video Generator</h3> <!-- Added mt-2 -->
-                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Transform text prompts into stunning videos using AI. Supports portrait/landscape, custom duration, and easy sharing.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <a href="app-detail.html?app=kveo" class="text-sm text-indigo-500 hover:underline">View Details</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="app-store-link inline-block bg-indigo-600 text-white text-sm py-2 px-5 rounded-lg hover:bg-indigo-700 transition duration-300">App Store &rarr;</a>
-                        </div>
-                    </div>
+                    <p class="section-intro">
+                        We help companies turn rough ideas, legacy builds, and half-finished roadmaps into mobile experiences people can trust. Strategy, design, engineering, and launch are treated as one product system.
+                    </p>
                 </div>
 
-                <!-- Xify App Card -->
-                 <div class="app-card bg-white rounded-xl shadow-lg overflow-hidden animate-fadeIn" style="animation-delay: 0.5s;" data-appname="xify">
-                    <div class="app-screenshots-preview">
-                        <img src="assets/xify/1.png" alt="Xify Screenshot 1" class="app-screenshot-preview">
-                        <img src="assets/xify/2.png" alt="Xify Screenshot 2" class="app-screenshot-preview">
-                        <img src="assets/xify/3.png" alt="Xify Screenshot 3" class="app-screenshot-preview">
-                    </div>
-                    <img src="assets/xify/appIcon.png" alt="Xify App Icon" class="app-icon">
-                    <div class="p-6 pt-12">
-                        <h3 class="text-xl font-semibold mb-2 mt-2">Xify</h3>
-                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">A powerful app for managing and organizing your digital life with intuitive features and seamless integration.</p>
-                         <div class="flex justify-between items-center mt-4">
-                            <a href="app-detail.html?app=xify" class="text-sm text-indigo-500 hover:underline">View Details</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="app-store-link inline-block bg-indigo-600 text-white text-sm py-2 px-5 rounded-lg hover:bg-indigo-700 transition duration-300">App Store &rarr;</a> <!-- Update href -->
+                <div class="services-grid">
+                    <article class="service-card">
+                        <span class="card-index">01 / Strategy</span>
+                        <div>
+                            <h3>Product clarity before code</h3>
+                            <p>We shape scope, user journeys, technical risk, and release milestones so the team knows what to build and why it matters.</p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- ScanPDF App Card -->
-                 <div class="app-card bg-white rounded-xl shadow-lg overflow-hidden animate-fadeIn" style="animation-delay: 0.6s;" data-appname="scanpdf">
-                    <div class="app-screenshots-preview">
-                        <img src="assets/scanpdf/1.png" alt="ScanPDF Screenshot 1" class="app-screenshot-preview">
-                        <img src="assets/scanpdf/2.png" alt="ScanPDF Screenshot 2" class="app-screenshot-preview">
-                        <img src="assets/scanpdf/3.png" alt="ScanPDF Screenshot 3" class="app-screenshot-preview">
-                    </div>
-                     <img src="assets/scanpdf/appIcon.png" alt="ScanPDF App Icon" class="app-icon">
-                    <div class="p-6 pt-12">
-                        <h3 class="text-xl font-semibold mb-2 mt-2">ScanPDF</h3>
-                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Scan, edit, and manage your PDF documents with ease. Perfect for professionals and students alike.</p>
-                         <div class="flex justify-between items-center mt-4">
-                            <a href="app-detail.html?app=scanpdf" class="text-sm text-indigo-500 hover:underline">View Details</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="app-store-link inline-block bg-indigo-600 text-white text-sm py-2 px-5 rounded-lg hover:bg-indigo-700 transition duration-300">App Store &rarr;</a> <!-- Update href -->
+                    </article>
+                    <article class="service-card">
+                        <span class="card-index">02 / Design</span>
+                        <div>
+                            <h3>Interfaces that feel native</h3>
+                            <p>Modern mobile UI, interaction patterns, accessibility, onboarding, and design systems tuned for iOS and cross-platform products.</p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Receiptly App Card -->
-                 <div class="app-card bg-white rounded-xl shadow-lg overflow-hidden animate-fadeIn" style="animation-delay: 0.7s;" data-appname="receiptly">
-                    <div class="app-screenshots-preview">
-                        <img src="assets/receiptly/1.png" alt="Receiptly Screenshot 1" class="app-screenshot-preview">
-                        <img src="assets/receiptly/2.png" alt="Receiptly Screenshot 2" class="app-screenshot-preview">
-                        <img src="assets/receiptly/3.png" alt="Receiptly Screenshot 3" class="app-screenshot-preview">
-                    </div>
-                    <img src="assets/receiptly/appIcon.png" alt="Receiptly App Icon" class="app-icon">
-                    <div class="p-6 pt-12">
-                        <h3 class="text-xl font-semibold mb-2 mt-2">Receiptly</h3>
-                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Track and manage your receipts effortlessly. Perfect for expense management and tax preparation.</p>
-                         <div class="flex justify-between items-center mt-4">
-                            <a href="app-detail.html?app=receiptly" class="text-sm text-indigo-500 hover:underline">View Details</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="app-store-link inline-block bg-indigo-600 text-white text-sm py-2 px-5 rounded-lg hover:bg-indigo-700 transition duration-300">App Store &rarr;</a> <!-- Update href -->
+                    </article>
+                    <article class="service-card">
+                        <span class="card-index">03 / Engineering</span>
+                        <div>
+                            <h3>Clean builds that can scale</h3>
+                            <p>Swift, SwiftUI, APIs, app architecture, performance work, release pipelines, and ongoing improvements after launch.</p>
                         </div>
-                    </div>
+                    </article>
                 </div>
-
-                <!-- LandlordsCo App Card -->
-                <div class="app-card bg-white rounded-xl shadow-lg overflow-hidden animate-fadeIn" style="animation-delay: 0.8s;" data-appname="landlordsco">
-                    <div class="app-screenshots-preview">
-                        <img src="assets/landlordsco/1.png" alt="LandlordsCo Screenshot 1" class="app-screenshot-preview">
-                        <img src="assets/landlordsco/2.png" alt="LandlordsCo Screenshot 2" class="app-screenshot-preview">
-                        <img src="assets/landlordsco/3.png" alt="LandlordsCo Screenshot 3" class="app-screenshot-preview">
-                    </div>
-                    <img src="assets/landlordsco/appIcon.png" alt="LandlordsCo App Icon" class="app-icon">
-                    <div class="p-6 pt-12">
-                        <h3 class="text-xl font-semibold mb-2 mt-2">LandlordsCo</h3>
-                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Property management made simple. Track tenants, manage properties, and handle maintenance requests.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <a href="app-detail.html?app=landlordsco" class="text-sm text-indigo-500 hover:underline">View Details</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="app-store-link inline-block bg-indigo-600 text-white text-sm py-2 px-5 rounded-lg hover:bg-indigo-700 transition duration-300">App Store &rarr;</a> <!-- Update href -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- KToon App Card -->
-                 <div class="app-card bg-white rounded-xl shadow-lg overflow-hidden animate-fadeIn" style="animation-delay: 0.9s;" data-appname="ktoon">
-                     <div class="app-screenshots-preview">
-                        <img src="assets/ktoon/1.png" alt="KToon Screenshot 1" class="app-screenshot-preview">
-                        <img src="assets/ktoon/2.png" alt="KToon Screenshot 2" class="app-screenshot-preview">
-                        <img src="assets/ktoon/3.png" alt="KToon Screenshot 3" class="app-screenshot-preview">
-                    </div>
-                    <img src="assets/ktoon/appIcon.png" alt="KToon App Icon" class="app-icon">
-                    <div class="p-6 pt-12">
-                        <h3 class="text-xl font-semibold mb-2 mt-2">KToon</h3>
-                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Create and share your own cartoons and animations with this powerful mobile animation studio.</p>
-                        <div class="flex justify-between items-center mt-4">
-                            <a href="app-detail.html?app=ktoon" class="text-sm text-indigo-500 hover:underline">View Details</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="app-store-link inline-block bg-indigo-600 text-white text-sm py-2 px-5 rounded-lg hover:bg-indigo-700 transition duration-300">App Store &rarr;</a> <!-- Update href -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Invoease App Card -->
-                 <div class="app-card bg-white rounded-xl shadow-lg overflow-hidden animate-fadeIn" style="animation-delay: 1.0s;" data-appname="invoease">
-                     <div class="app-screenshots-preview">
-                        <img src="assets/invoease/1.png" alt="Invoease Screenshot 1" class="app-screenshot-preview">
-                        <img src="assets/invoease/2.png" alt="Invoease Screenshot 2" class="app-screenshot-preview">
-                        <img src="assets/invoease/3.png" alt="Invoease Screenshot 3" class="app-screenshot-preview">
-                    </div>
-                    <img src="assets/invoease/appIcon.png" alt="Invoease App Icon" class="app-icon">
-                    <div class="p-6 pt-12">
-                        <h3 class="text-xl font-semibold mb-2 mt-2">Invoease</h3>
-                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">Streamline your invoicing process with this professional invoice management solution.</p>
-                         <div class="flex justify-between items-center mt-4">
-                            <a href="app-detail.html?app=invoease" class="text-sm text-indigo-500 hover:underline">View Details</a>
-                            <a href="#" target="_blank" rel="noopener noreferrer" class="app-store-link inline-block bg-indigo-600 text-white text-sm py-2 px-5 rounded-lg hover:bg-indigo-700 transition duration-300">App Store &rarr;</a> <!-- Update href -->
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-8 mt-16">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 Karmafy. All rights reserved.</p>
-            <p class="text-sm text-gray-500 mt-2">Specializing in Native iOS App Development</p>
+        <section id="process" class="section compact">
+            <div class="site-shell process-grid">
+                <div>
+                    <p class="section-kicker">How we work</p>
+                    <h2 class="section-heading">Senior thinking, tight feedback loops.</h2>
+                    <p class="section-intro">
+                        The best mobile products are not assembled from screens. They are shaped through decisions: what to remove, what to polish, and where reliability matters most.
+                    </p>
+                </div>
+                <div class="process-list">
+                    <article class="process-card">
+                        <span class="card-index">Discovery sprint</span>
+                        <h3>Map the business goal to the mobile experience.</h3>
+                        <p>We identify user moments, technical constraints, data needs, and the shortest path to a credible launch.</p>
+                    </article>
+                    <article class="process-card">
+                        <span class="card-index">Build sprint</span>
+                        <h3>Design and engineering move together.</h3>
+                        <p>Clickable product decisions become real app flows, with performance, accessibility, and App Store readiness included early.</p>
+                    </article>
+                    <article class="process-card">
+                        <span class="card-index">Launch care</span>
+                        <h3>Ship, measure, and keep improving.</h3>
+                        <p>We support store submission, release polish, issue triage, roadmap planning, and maintenance after the first version lands.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="apps" class="section">
+            <div class="site-shell">
+                <div class="split-heading">
+                    <div>
+                        <p class="section-kicker">Selected products</p>
+                        <h2 class="section-heading">Explore the app sites.</h2>
+                    </div>
+                    <p class="section-intro">
+                        Each product has its own focused home on the web. Browse the apps below, read what they do, and jump straight into the dedicated site.
+                    </p>
+                </div>
+                <div class="app-grid site-directory">
+                    <a class="app-card app-site-card" href="https://receiptly.karmaacademy.com.au/" target="_blank" rel="noopener noreferrer" style="--card-accent: #ff8a3d;">
+                        <div class="app-site-mark" aria-hidden="true"><span>R</span></div>
+                        <div class="app-body">
+                            <span class="card-index">01 / Finance</span>
+                            <h3>Receiptly</h3>
+                            <p>Scan receipts, organize expenses, track warranties, and export clean reports for personal or business records.</p>
+                        </div>
+                        <div class="app-actions">
+                            <span class="pill-button primary">Visit site</span>
+                            <span class="text-link">receiptly.karmaacademy.com.au</span>
+                        </div>
+                    </a>
+                    <a class="app-card app-site-card" href="https://invoeaseapp.com" target="_blank" rel="noopener noreferrer" style="--card-accent: #2f80ed;">
+                        <div class="app-site-mark" aria-hidden="true"><span>I</span></div>
+                        <div class="app-body">
+                            <span class="card-index">02 / Business</span>
+                            <h3>InvoEase</h3>
+                            <p>Create invoices and quotes, manage clients, customize payment details, and send polished PDFs from one billing workspace.</p>
+                        </div>
+                        <div class="app-actions">
+                            <span class="pill-button primary">Visit site</span>
+                            <span class="text-link">invoeaseapp.com</span>
+                        </div>
+                    </a>
+                    <a class="app-card app-site-card" href="https://parentsroom.app" target="_blank" rel="noopener noreferrer" style="--card-accent: #f6b7c8;">
+                        <div class="app-site-mark" aria-hidden="true"><span>P</span></div>
+                        <div class="app-body">
+                            <span class="card-index">03 / Family</span>
+                            <h3>Parents Room Finder</h3>
+                            <p>Find nearby parent rooms and baby-change facilities so families can plan outings with more confidence.</p>
+                        </div>
+                        <div class="app-actions">
+                            <span class="pill-button primary">Visit site</span>
+                            <span class="text-link">parentsroom.app</span>
+                        </div>
+                    </a>
+                    <a class="app-card app-site-card" href="https://reviewly.karmaacademy.com.au" target="_blank" rel="noopener noreferrer" style="--card-accent: #7c5cff;">
+                        <div class="app-site-mark" aria-hidden="true"><span>R</span></div>
+                        <div class="app-body">
+                            <span class="card-index">04 / Intelligence</span>
+                            <h3>Reviewly</h3>
+                            <p>Turn app reviews into useful signals with sentiment analysis, competitor tracking, and market insight tools.</p>
+                        </div>
+                        <div class="app-actions">
+                            <span class="pill-button primary">Visit site</span>
+                            <span class="text-link">reviewly.karmaacademy.com.au</span>
+                        </div>
+                    </a>
+                    <a class="app-card app-site-card" href="https://presently.karmaacademy.com.au" target="_blank" rel="noopener noreferrer" style="--card-accent: #00a3ff;">
+                        <div class="app-site-mark" aria-hidden="true"><span>P</span></div>
+                        <div class="app-body">
+                            <span class="card-index">05 / Productivity</span>
+                            <h3>Presently</h3>
+                            <p>Run presentations, timers, media, and music from a clean controller built for workshops and live sessions.</p>
+                        </div>
+                        <div class="app-actions">
+                            <span class="pill-button primary">Visit site</span>
+                            <span class="text-link">presently.karmaacademy.com.au</span>
+                        </div>
+                    </a>
+                    <a class="app-card app-site-card" href="https://paperly.karmaacademy.com.au" target="_blank" rel="noopener noreferrer" style="--card-accent: #111827;">
+                        <div class="app-site-mark" aria-hidden="true"><span>P</span></div>
+                        <div class="app-body">
+                            <span class="card-index">06 / Utilities</span>
+                            <h3>Paperly</h3>
+                            <p>Convert images and scans into searchable PDFs with OCR, document organization, and quick sharing tools.</p>
+                        </div>
+                        <div class="app-actions">
+                            <span class="pill-button primary">Visit site</span>
+                            <span class="text-link">paperly.karmaacademy.com.au</span>
+                        </div>
+                    </a>
+                    <a class="app-card app-site-card" href="https://meshy.karmaacademy.com.au/privacypolicy/" target="_blank" rel="noopener noreferrer" style="--card-accent: #dcff63;">
+                        <div class="app-site-mark" aria-hidden="true"><span>S</span></div>
+                        <div class="app-body">
+                            <span class="card-index">07 / Design</span>
+                            <h3>Spectrum</h3>
+                            <p>Create custom mesh gradients, abstract wallpapers, and high-resolution background exports with precise color control.</p>
+                        </div>
+                        <div class="app-actions">
+                            <span class="pill-button primary">Visit site</span>
+                            <span class="text-link">meshy.karmaacademy.com.au</span>
+                        </div>
+                    </a>
+                    <a class="app-card app-site-card" href="https://ktoon.karmaacademy.com.au" target="_blank" rel="noopener noreferrer" style="--card-accent: #ff5c35;">
+                        <div class="app-site-mark" aria-hidden="true"><span>K</span></div>
+                        <div class="app-body">
+                            <span class="card-index">08 / Creativity</span>
+                            <h3>KToon</h3>
+                            <p>Transform photos into cartoon, anime, manga, sketch, and painting-inspired styles with AI-powered image effects.</p>
+                        </div>
+                        <div class="app-actions">
+                            <span class="pill-button primary">Visit site</span>
+                            <span class="text-link">ktoon.karmaacademy.com.au</span>
+                        </div>
+                    </a>
+                    <a class="app-card app-site-card" href="https://rockly.karmaacademy.com.au" target="_blank" rel="noopener noreferrer" style="--card-accent: #8b5e34;">
+                        <div class="app-site-mark" aria-hidden="true"><span>R</span></div>
+                        <div class="app-body">
+                            <span class="card-index">09 / Reference</span>
+                            <h3>Rockly</h3>
+                            <p>Identify rocks, minerals, crystals, and gems from photos, then build a personal collection with geology learning tools.</p>
+                        </div>
+                        <div class="app-actions">
+                            <span class="pill-button primary">Visit site</span>
+                            <span class="text-link">rockly.karmaacademy.com.au</span>
+                        </div>
+                    </a>
+                    <a class="app-card app-site-card" href="https://viralhookgenerator.karmaacademy.com.au" target="_blank" rel="noopener noreferrer" style="--card-accent: #22c55e;">
+                        <div class="app-site-mark" aria-hidden="true"><span>V</span></div>
+                        <div class="app-body">
+                            <span class="card-index">10 / Social</span>
+                            <h3>Viral Hook Generator</h3>
+                            <p>Generate scroll-stopping hooks and social content ideas for Reels, TikTok, Shorts, LinkedIn, and more.</p>
+                        </div>
+                        <div class="app-actions">
+                            <span class="pill-button primary">Visit site</span>
+                            <span class="text-link">viralhookgenerator.karmaacademy.com.au</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="section compact">
+            <div class="site-shell">
+                <div class="split-heading">
+                    <div>
+                        <p class="section-kicker">Field notes</p>
+                        <h2 class="section-heading">Sharp thinking for mobile teams.</h2>
+                    </div>
+                    <p class="section-intro">
+                        Short, practical reads for founders and product teams making decisions about mobile strategy, launch quality, and app performance.
+                    </p>
+                </div>
+                <div class="blog-grid">
+                    <article class="blog-card featured">
+                        <div>
+                            <span class="blog-tag">Strategy</span>
+                            <h3>The mobile MVP should feel smaller, not cheaper.</h3>
+                            <p>A practical guide to cutting scope without cutting product confidence, design quality, or the launch story.</p>
+                        </div>
+                        <span class="text-link">6 min read</span>
+                    </article>
+                    <article class="blog-card">
+                        <div>
+                            <span class="blog-tag">Launch</span>
+                            <h3>What to fix before App Store submission.</h3>
+                            <p>The details that make reviewers, first users, and internal stakeholders trust the release.</p>
+                        </div>
+                        <span class="text-link">4 min read</span>
+                    </article>
+                    <article class="blog-card">
+                        <div>
+                            <span class="blog-tag">Performance</span>
+                            <h3>Native polish is mostly invisible.</h3>
+                            <p>Why startup time, haptics, scroll feel, and offline states matter as much as the visible screens.</p>
+                        </div>
+                        <span class="text-link">5 min read</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section compact">
+            <div class="site-shell">
+                <div class="cta-panel">
+                    <p class="section-kicker">Start here</p>
+                    <h2 class="section-heading">Bring us the messy product idea.</h2>
+                    <p class="section-intro">
+                        We will help turn it into a mobile roadmap, a believable first release, and an app people want to keep using.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="contact.html" class="pill-button primary">Plan Your App</a>
+                        <a href="about.html" class="pill-button">Meet Karmafy</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-shell footer-grid">
+            <a href="index.html" class="brand-mark" aria-label="Karmafy Apps Pty Ltd home">
+                <img src="assets/karmafy-apps-logo.png" alt="Karmafy Apps Pty Ltd" class="brand-logo">
+            </a>
+            <p>&copy; 2026 Karmafy Apps Pty Ltd. Mobile app consulting, design, and engineering.</p>
         </div>
     </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const originalAppsGrid = document.getElementById('original-apps-grid');
-        const liveAppsGrid = document.getElementById('live-apps-grid');
-        const upcomingAppsGrid = document.getElementById('upcoming-apps-grid');
-        const upcomingSection = document.getElementById('upcoming-apps-section');
-        const appCards = Array.from(originalAppsGrid.querySelectorAll('.app-card')); // Get cards from original grid
-
-        if (!liveAppsGrid || !upcomingAppsGrid || !upcomingSection || !originalAppsGrid) {
-            console.error('Required grid elements not found!');
-            return;
-        }
-
-        const appStoreBaseUrl = 'https://apps.apple.com/app/id';
-        let upcomingAppCount = 0;
-
-        // Create an array of promises to fetch data for all cards
-        const fetchPromises = appCards.map(card => {
-            const appName = card.dataset.appname;
-            if (!appName) {
-                console.warn('Card missing data-appname:', card);
-                return Promise.resolve({ card, data: null, error: 'Missing data-appname' }); // Resolve gracefully
-            }
-            
-            return fetch(`assets/${appName}/descriptions.json`)
-                .then(response => {
-                    if (!response.ok) {
-                        // Treat fetch errors (like 404) as 'upcoming' or 'data unavailable'
-                        console.warn(`Could not fetch descriptions.json for ${appName}. Status: ${response.status}`);
-                        return { card, data: { isLive: false, appId: null }, error: `Fetch failed: ${response.status}` }; // Default to upcoming
-                    }
-                    return response.json().then(data => ({ card, data, error: null }));
-                })
-                .catch(error => {
-                    console.error(`Error fetching or parsing descriptions.json for ${appName}:`, error);
-                    return { card, data: { isLive: false, appId: null }, error: error.message }; // Default to upcoming on error
-                });
+        document.addEventListener('DOMContentLoaded', () => {
+            window.KarmafyTheme?.init();
+            window.KarmafyEmail?.init();
         });
-
-        // Process all fetches once they settle
-        Promise.allSettled(fetchPromises)
-            .then(results => {
-                results.forEach(result => {
-                    let isLive = false; // Default to not live
-
-                    if (result.status === 'fulfilled') {
-                        const { card, data, error } = result.value;
-                        const appStoreLink = card.querySelector('.app-store-link');
-                        
-                        // Determine live status
-                        isLive = (data && data.isLive === true);
-
-                        // Update App Store link if possible AND the app is live
-                        if (appStoreLink && isLive && data && data.appId) {
-                            const appStoreUrl = `${appStoreBaseUrl}${data.appId}`;
-                            appStoreLink.href = appStoreUrl;
-                            appStoreLink.style.display = ''; // Ensure visible if live
-                        } else if (appStoreLink) {
-                            // If not live, or no appId, hide the link
-                            appStoreLink.style.display = 'none'; 
-                            if(!error && !isLive && data && data.appId) console.warn(`Hiding App Store link for non-live app: ${card.dataset.appname}`);
-                            else if(!error && isLive && !(data && data.appId)) console.warn(`Hiding App Store link due to missing appId for live app: ${card.dataset.appname}`);
-                            else if (!isLive) console.warn(`Hiding App Store link for upcoming/failed fetch app: ${card.dataset.appname}`);
-                        }
-
-                        // Sort into grids based on determined live status
-                        if (isLive) {
-                            liveAppsGrid.appendChild(card);
-                        } else {
-                            upcomingAppsGrid.appendChild(card);
-                            upcomingAppCount++;
-                        }
-                    } else {
-                        // Handle rejected promises (though catch above should handle most)
-                        console.error('Fetch promise rejected:', result.reason);
-                        // Move card to upcoming as a fallback
-                         if(result.reason && result.reason.card) {
-                            const card = result.reason.card;
-                            const appStoreLink = card.querySelector('.app-store-link');
-                            if (appStoreLink) {
-                                 appStoreLink.style.display = 'none'; // Hide link on error too
-                            }
-                            upcomingAppsGrid.appendChild(card);
-                            upcomingAppCount++;
-                         } 
-                    }
-                });
-
-                // Show the upcoming section only if it has apps
-                if (upcomingAppCount > 0) {
-                    upcomingSection.style.display = 'block';
-                }
-                
-                // Optional: Remove the original grid from DOM after processing
-                // originalAppsGrid.remove(); 
-                // Or ensure it stays hidden:
-                 originalAppsGrid.style.display = 'none';
-
-            });
-    });
     </script>
-
+    <script src="site.js"></script>
 </body>
 </html> 

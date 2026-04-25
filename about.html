@@ -3,63 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Karmafy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Learn how Karmafy approaches mobile app strategy, design, engineering, and launch support.">
+    <title>Karmafy Apps Pty Ltd</title>
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('karmafy-theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.dataset.theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/karmafy-apps-logo.png">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Basic animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-    </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
-
-    <!-- Header & Navigation -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-indigo-600">Karmafy</a>
-            <ul class="flex space-x-6">
-                <li><a href="index.html" class="text-gray-600 hover:text-indigo-600 font-medium">Home</a></li>
-                <li><a href="about.html" class="text-gray-600 hover:text-indigo-600 font-medium">About Us</a></li>
-                <li><a href="contact.html" class="text-gray-600 hover:text-indigo-600 font-medium">Contact Us</a></li>
-            </ul>
+<body>
+    <header class="site-header">
+        <nav class="site-shell site-nav" aria-label="Primary navigation">
+            <a href="index.html" class="brand-mark" aria-label="Karmafy Apps Pty Ltd home">
+                <img src="assets/karmafy-apps-logo.png" alt="Karmafy Apps Pty Ltd" class="brand-logo">
+            </a>
+            <div class="nav-links" aria-label="Primary links">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#process">Process</a>
+                <a href="index.html#apps">Work</a>
+                <a href="index.html#blog">Blog</a>
+                <a href="about.html" aria-current="page">About</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" type="button" aria-label="Switch color theme" data-theme-toggle>
+                    <span data-theme-icon>◐</span>
+                </button>
+                <a href="contact.html" class="pill-button primary">Start a Project</a>
+            </div>
         </nav>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-16">
-        <div class="bg-white p-8 md:p-12 rounded-lg shadow-lg animate-fadeIn">
-            <h1 class="text-3xl md:text-4xl font-bold text-indigo-600 mb-6">About Karmafy</h1>
-            <p class="text-lg text-gray-700 mb-4 leading-relaxed">
-                Karmafy is a passionate team dedicated to building high-quality, user-centric native iOS applications. We believe in the power of elegant design, seamless performance, and intuitive user experiences. Our expertise lies in leveraging the latest Apple technologies to bring innovative mobile ideas to life.
-            </p>
-            <p class="text-lg text-gray-700 mb-4 leading-relaxed">
-                From initial concept to App Store launch and beyond, we partner with our clients to create apps that not only meet but exceed expectations. We focus on clean code, robust architecture, and pixel-perfect interfaces to ensure every app we build is a masterpiece of form and function.
-            </p>
-            <h2 class="text-2xl font-semibold text-gray-800 mt-8 mb-4">Our Expertise</h2>
-            <ul class="list-disc list-inside text-gray-700 space-y-2">
-                <li>Native iOS Development (Swift, Objective-C)</li>
-                <li>UI/UX Design for Mobile</li>
-                <li>App Store Optimization (ASO)</li>
-                <li>API Integration</li>
-                <li>Performance Tuning</li>
-                <li>Ongoing App Maintenance & Support</li>
-            </ul>
-        </div>
+    <main>
+        <section class="page-hero">
+            <div class="site-shell">
+                <p class="section-kicker">About Karmafy</p>
+                <h1 class="page-title">A mobile studio for teams that care about the details.</h1>
+                <p class="page-copy">
+                    Karmafy helps companies plan, design, build, and improve mobile apps with the craft of a product studio and the pragmatism of senior engineers.
+                </p>
+            </div>
+        </section>
+
+        <section class="section compact">
+            <div class="site-shell process-grid">
+                <article class="content-card">
+                    <span class="card-index">Point of view</span>
+                    <h2 class="section-heading" style="font-size: clamp(2.4rem, 6vw, 4.5rem);">Mobile products need restraint.</h2>
+                    <p>
+                        Good apps are not feature piles. They are focused systems where the interface, data, performance, and launch plan all support the same user promise.
+                    </p>
+                    <p>
+                        We work best with founders, operators, and product teams who want senior judgment, clear communication, and polished execution from concept to App Store release.
+                    </p>
+                </article>
+
+                <div class="process-list">
+                    <article class="process-card">
+                        <span class="card-index">01 / Native quality</span>
+                        <h3>Swift, SwiftUI, UIKit, and mobile-first architecture.</h3>
+                        <p>We build for the details users feel: launch speed, motion, offline states, accessibility, and reliable App Store releases.</p>
+                    </article>
+                    <article class="process-card">
+                        <span class="card-index">02 / Product design</span>
+                        <h3>UX that makes complex products feel obvious.</h3>
+                        <p>We shape flows, visual systems, onboarding, and interaction patterns so users understand the product quickly.</p>
+                    </article>
+                    <article class="process-card">
+                        <span class="card-index">03 / Long-term support</span>
+                        <h3>Launch is a milestone, not the finish line.</h3>
+                        <p>We help with maintenance, roadmap planning, performance tuning, integrations, and iteration after real users arrive.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section compact">
+            <div class="site-shell">
+                <div class="cta-panel">
+                    <p class="section-kicker">Partner with us</p>
+                    <h2 class="section-heading">Need senior mobile help?</h2>
+                    <p class="section-intro">Bring the product idea, roadmap, or app problem. We will help you turn it into a focused plan and a better mobile experience.</p>
+                    <div class="hero-actions">
+                        <a href="contact.html" class="pill-button primary">Start the Conversation</a>
+                        <a href="index.html#apps" class="pill-button">See Work</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 py-8 mt-16">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 Karmafy. All rights reserved.</p>
-            <p class="text-sm text-gray-500 mt-2">Specializing in Native iOS App Development</p>
+    <footer class="site-footer">
+        <div class="site-shell footer-grid">
+            <a href="index.html" class="brand-mark" aria-label="Karmafy Apps Pty Ltd home">
+                <img src="assets/karmafy-apps-logo.png" alt="Karmafy Apps Pty Ltd" class="brand-logo">
+            </a>
+            <p>&copy; 2026 Karmafy Apps Pty Ltd. Mobile app consulting, design, and engineering.</p>
         </div>
     </footer>
+    <script src="site.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.KarmafyTheme?.init();
+            window.KarmafyEmail?.init();
+        });
+    </script>
 
 </body>
 </html> 
